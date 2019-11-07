@@ -5,13 +5,13 @@ natively on Linux
 
 To build:
 
-    ./build
+    ./build <docker tag>
 
-(this finishes by running 'docker build -t freebsd-cross-build .')
+(this finishes by running 'docker build -t <tag> .')
 
 To run:
 
-    docker run --rm -it freebsd-cross-build
+    docker run --rm -it <tag>
 
 There is /freebsd/bin on the path. It has all of the build
 tools (e.g. x86_64-pc-freebsd9-gcc)
