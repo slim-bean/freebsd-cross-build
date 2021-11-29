@@ -5,7 +5,7 @@ set -eux
 
 arch=$1
 binutils_version=2.34
-freebsd_version=12.1
+freebsd_version=12.2
 triple=$arch-unknown-freebsd12
 sysroot=/usr/local/$triple
 

@@ -1,5 +1,5 @@
 #FROM ubuntu:20.04
-FROM golang:1.16-buster
+FROM golang:1.17-buster
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
