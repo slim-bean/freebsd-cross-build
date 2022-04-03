@@ -4,7 +4,7 @@
 set -eux
 
 arch=$1
-binutils_version=2.34
+binutils_version=2.38
 freebsd_version=12.3
 triple=$arch-unknown-freebsd12
 sysroot=/usr/local/$triple
@@ -57,7 +57,7 @@ for lib in c_nonshared compiler_rt gcc pthread rt ssp_nonshared; do
   files_to_extract=("${files_to_extract[@]}" "./usr/lib/lib${lib}.*")
 done
 
-URL=http://ftp-archive.freebsd.org/pub/FreeBSD-Archive/old-releases/${freebsd_arch}/${freebsd_version}-RELEASE/base.txz
+URL=http://ftp.freebsd.org/pub/FreeBSD/releases/${freebsd_arch}/${freebsd_version}-RELEASE/base.txz
 curl "$URL" | tar xJf - -C "$sysroot" --wildcards "${files_to_extract[@]}"
 
 # Clang can do cross-builds out of the box, if we give it the right
