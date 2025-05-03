@@ -5,8 +5,8 @@ set -eux
 
 arch=$1
 binutils_version=2.38
-freebsd_version=12.3
-triple=$arch-unknown-freebsd12
+freebsd_version=14.2
+triple=$arch-unknown-freebsd14
 sysroot=/usr/local/$triple
 
 hide_output() {
