@@ -4,9 +4,9 @@
 set -eux
 
 arch=$1
-binutils_version=2.38
-freebsd_version=14.2
-triple=$arch-unknown-freebsd14
+binutils_version=2.45
+freebsd_version=16.0
+triple=$arch-unknown-freebsd16
 sysroot=/usr/local/$triple
 
 hide_output() {
@@ -50,14 +50,16 @@ files_to_extract=(
 "./usr/lib/*crt*.o"
 )
 # Try to unpack only the libraries the build needs, to save space.
-for lib in c pcap ibverbs mlx5 gcc_s thr; do
+# these libs exist in /lib/ and /usr/lib/
+for lib in c pcap ibverbs mlx5 gcc_s thr bnxtre sys; do
   files_to_extract=("${files_to_extract[@]}" "./lib/lib${lib}.*" "./usr/lib/lib${lib}.*")
 done
+# these libs only exist in /usr/lib/
 for lib in c_nonshared compiler_rt gcc pthread rt ssp_nonshared; do
   files_to_extract=("${files_to_extract[@]}" "./usr/lib/lib${lib}.*")
 done
 
-URL=http://ftp.freebsd.org/pub/FreeBSD/releases/${freebsd_arch}/${freebsd_version}-RELEASE/base.txz
+URL=http://ftp.freebsd.org/pub/FreeBSD/snapshots/${freebsd_arch}/${freebsd_version}-CURRENT/base.txz
 curl "$URL" | tar xJf - -C "$sysroot" --wildcards "${files_to_extract[@]}"
 
 # Clang can do cross-builds out of the box, if we give it the right

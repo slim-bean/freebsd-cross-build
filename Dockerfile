@@ -1,5 +1,5 @@
 #FROM ubuntu:20.04
-FROM golang:1.24-bookworm
+FROM golang:1.25.5-trixie
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -18,9 +18,9 @@ COPY freebsd-toolchain.sh /tmp/
 RUN /tmp/freebsd-toolchain.sh x86_64
 
 ENV \
-    AR=x86_64-unknown-freebsd14-ar \
-    CC=x86_64-unknown-freebsd14-clang \
-    CX=x86_64-unknown-freebsd14-clang++ \
+    AR=x86_64-unknown-freebsd16-ar \
+    CC=x86_64-unknown-freebsd16-clang \
+    CX=x86_64-unknown-freebsd16-clang++ \
     GOOS=freebsd \
     GOARCH=amd64 \
     CGO_ENABLED=1 \
